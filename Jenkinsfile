@@ -13,7 +13,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: '3.83.240.36', usernameVariable: 'USERNAME')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: '3.83.240.36' )]) {
                     sshPublisher(
                         failOnError: true,
                         continueOnError: false,
@@ -21,7 +21,7 @@ pipeline {
                              sshPublisherDesc(
                                  configName: 'staging',
                                  sshCredentials: [
-                                     username: "$USERNAME",
+                                     username: "ec2-user",
                                      key: '''-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAgoWWwoyT1BW94G8QZE7BH+KsUDz5/3lG7OUxYchGSvDzsS4q
 vmJrvfs66DG/uUEXPGAQtbAZ12Wx0qvi9bqYVMN2TqqyEwjssz0wBDadqChOsqHh
