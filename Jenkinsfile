@@ -22,7 +22,7 @@ pipeline {
                                  configName: 'staging',
                                  sshCredentials: [
                                      username: 'ec2-user',
-                                     key: key: '''-----BEGIN RSA PRIVATE KEY-----
+                                     key:'''-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAgoWWwoyT1BW94G8QZE7BH+KsUDz5/3lG7OUxYchGSvDzsS4q
 vmJrvfs66DG/uUEXPGAQtbAZ12Wx0qvi9bqYVMN2TqqyEwjssz0wBDadqChOsqHh
 LrrkdYwmF4s3kEiM7kd6oPZ88pS71wmpok+SZglxzr15JgiBu5r1CnuuBUhh4tMz
