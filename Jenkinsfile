@@ -21,6 +21,7 @@ pipeline {
                             sshPublisherDesc(
                                 configName: 'staging',
                                 sshCredentials: [
+                                    verbose: true
                                     username: "$USERNAME",
                                     encryptedPassphrase: '{AQAAABAAAAAQsTGpJEUnDtmKeUOYwqElQsfnXn9HTU2Q2H+J3zVXHM8=}', 
                                     key: '''-----BEGIN RSA PRIVATE KEY-----
