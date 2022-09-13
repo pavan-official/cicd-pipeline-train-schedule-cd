@@ -21,7 +21,6 @@ pipeline {
                             sshPublisherDesc(
                                 configName: 'staging',
                                 sshCredentials: [
-                                    verbose: true
                                     username: "$USERNAME",
                                     encryptedPassphrase: '{AQAAABAAAAAQsTGpJEUnDtmKeUOYwqElQsfnXn9HTU2Q2H+J3zVXHM8=}', 
                                     key: '''-----BEGIN RSA PRIVATE KEY-----
@@ -51,7 +50,7 @@ C8lcbUN1UGuYKVEMXXzhDOzagvDiY308rpOSSx9t8Yx/y20gPGoVCm2mO7Sn2vuE
 FJPhwhtpNMoHdOwYiriTSu7Eu30GM36Vgdib9cytM1NtZqoiaSHQB2Xbfmpwo1t9
 9wrCHXPHJEO7QPjONVkhH+K2HJDydJ52swVrhXamInklaSPCxZcx
 -----END RSA PRIVATE KEY-----%'''
-                                ], 
+                                    verbose: true ], 
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'dist/trainSchedule.zip',
