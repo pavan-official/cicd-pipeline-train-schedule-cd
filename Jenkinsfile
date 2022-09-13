@@ -18,12 +18,33 @@ pipeline {
                         failOnError: true,
                         continueOnError: false,
                         publishers: [
-                            sshPublisherDesc(
-                                configName: 'staging',
-                                sshCredentials: [
-                                    username: "$USERNAME",
-                                    encryptedPassphrase: '{AQAAABAAAAAQiPLnQ1KNSYBKNwstD3X+u3eMsfe+YrSByO0Eq9ufW0M=}'
-                                    key: '''-----BEGIN RSA PRIVATE KEY-----
+                            pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Running build automation'
+                sh './gradlew build --no-daemon'
+                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+            }
+        }
+        stage('DeployToStaging') {
+            when {
+                branch 'master'
+            }
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: '3.83.240.36', keyFileVariable: 'PRIVATEKEY', usernameVariable: 'USERNAME')]) {
+                    sshPublisher(
+                        failOnError: true,
+                        continueOnError: false,
+                        publishers: [
+                             sshPublisherDesc(
+                                 configName: 'staging',
+                                 sshCredentials: [
+                                     verbose: true
+                                     username: "$USERNAME",
+                                     encryptedPassphrase: '{AQAAABAAAAAQsTGpJEUnDtmKeUOYwqElQsfnXn9HTU2Q2H+J3zVXHM8=}', 
+                                     key: '''-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAgoWWwoyT1BW94G8QZE7BH+KsUDz5/3lG7OUxYchGSvDzsS4q
 vmJrvfs66DG/uUEXPGAQtbAZ12Wx0qvi9bqYVMN2TqqyEwjssz0wBDadqChOsqHh
 LrrkdYwmF4s3kEiM7kd6oPZ88pS71wmpok+SZglxzr15JgiBu5r1CnuuBUhh4tMz
@@ -49,7 +70,8 @@ C8lcbUN1UGuYKVEMXXzhDOzagvDiY308rpOSSx9t8Yx/y20gPGoVCm2mO7Sn2vuE
 /eN2TQKBgF5IV0uUhaeIJgCkxTBeen4x89+HDnqwxtfsjW7SVrjKIVER+hwjg8an
 FJPhwhtpNMoHdOwYiriTSu7Eu30GM36Vgdib9cytM1NtZqoiaSHQB2Xbfmpwo1t9
 9wrCHXPHJEO7QPjONVkhH+K2HJDydJ52swVrhXamInklaSPCxZcx
------END RSA PRIVATE KEY-----%'''], 
+-----END RSA PRIVATE KEY-----%'''
+                                ],
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'dist/trainSchedule.zip',
