@@ -13,7 +13,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'ec2-user', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: '3.83.240.36', keyFileVariable: 'PRIVATEKEY', usernameVariable: 'USERNAME')]) {
                     sshPublisher(
                         failOnError: true,
                         continueOnError: false,
@@ -22,7 +22,7 @@ pipeline {
                                 configName: 'staging',
                                 sshCredentials: [
                                     username: "$USERNAME",
-                                    encryptedKey: "$USERPASS"
+                                    Key: "PRIVATEKEY"
                                 ], 
                                 transfers: [
                                     sshTransfer(
