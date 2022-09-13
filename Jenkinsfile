@@ -22,7 +22,6 @@ pipeline {
                                  configName: 'staging',
                                  sshCredentials: [
                                      username: "$USERNAME",
-                                     encryptedPassphrase: '{AQAAABAAAAAQsTGpJEUnDtmKeUOYwqElQsfnXn9HTU2Q2H+J3zVXHM8=}', 
                                      key: '''-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAgoWWwoyT1BW94G8QZE7BH+KsUDz5/3lG7OUxYchGSvDzsS4q
 vmJrvfs66DG/uUEXPGAQtbAZ12Wx0qvi9bqYVMN2TqqyEwjssz0wBDadqChOsqHh
