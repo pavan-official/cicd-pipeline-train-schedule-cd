@@ -19,11 +19,8 @@ pipeline {
                         continueOnError: false,
                         publishers: [
                             sshPublisherDesc(
-                                configName: 'staging',
-                                sshCredentials: [
-                                    username: "$USERNAME",
-                                    encryptedPassphrase: '{AQAAABAAAAAQsTGpJEUnDtmKeUOYwqElQsfnXn9HTU2Q2H+J3zVXHM8=}', 
-                                    key: '''-----BEGIN RSA PRIVATE KEY-----
+                                (configName: 'staging', 
+                                 sshCredentials: [encryptedPassphrase: '{AQAAABAAAAAQcYJdRevt/d204FnU8p5EIFah2D7Qw5Yb/2VC0FzE7wc=}', key: '''-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAgoWWwoyT1BW94G8QZE7BH+KsUDz5/3lG7OUxYchGSvDzsS4q
 vmJrvfs66DG/uUEXPGAQtbAZ12Wx0qvi9bqYVMN2TqqyEwjssz0wBDadqChOsqHh
 LrrkdYwmF4s3kEiM7kd6oPZ88pS71wmpok+SZglxzr15JgiBu5r1CnuuBUhh4tMz
@@ -49,8 +46,7 @@ C8lcbUN1UGuYKVEMXXzhDOzagvDiY308rpOSSx9t8Yx/y20gPGoVCm2mO7Sn2vuE
 /eN2TQKBgF5IV0uUhaeIJgCkxTBeen4x89+HDnqwxtfsjW7SVrjKIVER+hwjg8an
 FJPhwhtpNMoHdOwYiriTSu7Eu30GM36Vgdib9cytM1NtZqoiaSHQB2Xbfmpwo1t9
 9wrCHXPHJEO7QPjONVkhH+K2HJDydJ52swVrhXamInklaSPCxZcx
------END RSA PRIVATE KEY-----%'''
-                                    verbose: true ], 
+-----END RSA PRIVATE KEY-----%''', username: 'ec2-user'], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)], 
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'dist/trainSchedule.zip',
