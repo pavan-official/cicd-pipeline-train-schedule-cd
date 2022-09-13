@@ -13,26 +13,6 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: '3.83.240.36', usernameVariable: 'USERNAME')]) {
-                    sshPublisher(
-                        failOnError: true,
-                        continueOnError: false,
-                        publishers: [
-                            pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
-            }
-        }
-        stage('DeployToStaging') {
-            when {
-                branch 'master'
-            }
-            steps {
                 withCredentials([sshUserPrivateKey(credentialsId: '3.83.240.36', keyFileVariable: 'PRIVATEKEY', usernameVariable: 'USERNAME')]) {
                     sshPublisher(
                         failOnError: true,
@@ -41,7 +21,6 @@ pipeline {
                              sshPublisherDesc(
                                  configName: 'staging',
                                  sshCredentials: [
-                                     verbose: true
                                      username: "$USERNAME",
                                      encryptedPassphrase: '{AQAAABAAAAAQsTGpJEUnDtmKeUOYwqElQsfnXn9HTU2Q2H+J3zVXHM8=}', 
                                      key: '''-----BEGIN RSA PRIVATE KEY-----
